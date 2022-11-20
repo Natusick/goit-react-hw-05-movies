@@ -1,13 +1,15 @@
 import { Notify } from "notiflix";
 import { useState, useEffect } from "react";
-import { MovieList } from '../../components/MovieList/MovieList';
+import { MovieList } from "../../components/MovieList/MovieList";
+import { ButtonAddTransactions } from "../../components/ButtonModal/ButtonModal";
 import * as getApi from "../../services/Api";
-import s from './Home.module.css'
 
+import s from "./Home.module.css";
 
 export const Home = () => {
   const [countPage, setCountPage] = useState(1);
   const [movies, setMovies] = useState([]);
+  
 
   useEffect(() => {
     const fetch = async () => {
@@ -18,15 +20,17 @@ export const Home = () => {
 
         setMovies(results);
       } catch (e) {
-        Notify.info('Pleas enter the name of movie')
+        Notify.info("Pleas enter the name of movie");
       }
     };
     fetch();
   }, [countPage]);
+
   return (
     <div className={s.homepage}>
-    <h2 className={s.title}>Trending today</h2>
+      <h2 className={s.title}>Trending today</h2>
       <MovieList movies={movies} />
+      <ButtonAddTransactions  />
     </div>
   );
 };
